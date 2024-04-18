@@ -43,11 +43,11 @@ abstract class AbstractEndpoint
     {
         $request = $this->requestFactory->createRequest('POST', OneSendApi::API_ENDPOINT.$iri);
 
-        $request->withHeader('Content-Type', 'application/json');
-        $request->withHeader('Accept', 'application/json');
-        $request->withHeader('Authorization', 'ProjectKey '.$this->client->getApiKey());
+        $request = $request->withHeader('Content-Type', 'application/json');
+        $request = $request->withHeader('Accept', 'application/json');
+        $request = $request->withHeader('Authorization', 'ProjectKey '.$this->client->getApiKey());
         try {
-            $request->withBody(
+            $request = $request->withBody(
                 Psr17FactoryDiscovery::findStreamFactory()->createStream(json_encode($payload, \JSON_THROW_ON_ERROR))
             );
         } catch (\JsonException $e) {
@@ -65,8 +65,8 @@ abstract class AbstractEndpoint
     {
         $request = $this->requestFactory->createRequest('GET', OneSendApi::API_ENDPOINT.$iri);
 
-        $request->withHeader('Accept', 'application/json');
-        $request->withHeader('Authorization', 'ProjectKey '.$this->client->getApiKey());
+        $request = $request->withHeader('Accept', 'application/json');
+        $request = $request->withHeader('Authorization', 'ProjectKey '.$this->client->getApiKey());
 
         return $this->doRequestAndMapResponse($request);
     }
