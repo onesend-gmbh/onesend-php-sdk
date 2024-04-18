@@ -7,14 +7,14 @@ namespace OnesendGmbh\OnesendPhpSdk\Dto;
 readonly class ApiViolation
 {
     public function __construct(
-        private string $propertyPah,
+        private string $propertyPath,
         private string $message,
     ) {
     }
 
-    public function getPropertyPah(): string
+    public function getPropertyPath(): string
     {
-        return $this->propertyPah;
+        return $this->propertyPath;
     }
 
     public function getMessage(): string

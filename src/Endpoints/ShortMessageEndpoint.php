@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace OnesendGmbh\OnesendPhpSdk\Endpoints;
 
+use OnesendGmbh\OnesendPhpSdk\Exception\AccessDeniedException;
 use OnesendGmbh\OnesendPhpSdk\Exception\ApiUnavailableException;
 use OnesendGmbh\OnesendPhpSdk\Exception\OneSendApiException;
 use OnesendGmbh\OnesendPhpSdk\Exception\ViolationException;
@@ -25,6 +26,7 @@ class ShortMessageEndpoint extends AbstractEndpoint
      * @throws ClientExceptionInterface
      * @throws ApiUnavailableException
      * @throws OneSendApiException
+     * @throws AccessDeniedException
      */
     public function send(array $payload): ShortMessage
     {

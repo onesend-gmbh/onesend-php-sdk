@@ -18,7 +18,7 @@ class OneSendApi
     protected ClientInterface $httpClient;
     protected string $apiKey;
 
-    public readonly ShortMessageEndpoint $shortMessage;
+    public readonly ShortMessageEndpoint $shortMessages;
 
     public function __construct(string $apiKey, ?ClientInterface $httpClient = null)
     {
@@ -29,7 +29,7 @@ class OneSendApi
 
     private function initEndpoints(): void
     {
-        $this->shortMessage = new ShortMessageEndpoint($this);
+        $this->shortMessages = new ShortMessageEndpoint($this);
     }
 
     public function getApiKey(): string

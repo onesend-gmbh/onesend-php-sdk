@@ -37,6 +37,7 @@ abstract class AbstractEndpoint
      * @throws ClientExceptionInterface
      * @throws ApiUnavailableException
      * @throws OneSendApiException
+     * @throws AccessDeniedException
      */
     protected function createResource(string $iri, array $payload): BaseResource
     {
@@ -110,7 +111,7 @@ abstract class AbstractEndpoint
         if (422 === $response->getStatusCode()) {
             try {
                 $responsePayload = json_decode($response->getBody()->getContents(), true, 512, \JSON_THROW_ON_ERROR);
-                throw new ViolationException(array_map(static fn (array $violation) => new ApiViolation($violation['propertyPath'], $violation['message']), $responsePayload));
+                throw new ViolationException(array_map(static fn (array $violation) => new ApiViolation($violation['propertyPath'], $violation['message']), $responsePayload['violations']));
             } catch (\JsonException) {
             }
         }
