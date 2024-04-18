@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace OnesendGmbh\OnesendPhpSdk\Exception;
 
-abstract class OneSendApiException extends \Exception
+class OneSendApiException extends \Exception
 {
     protected bool $retryable = false;
 

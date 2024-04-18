@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace OnesendGmbh\OnesendPhpSdk;
 
 use Http\Discovery\Psr18ClientDiscovery;
+use OnesendGmbh\OnesendPhpSdk\Endpoints\ShortMessageEndpoint;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestInterface;
@@ -17,19 +18,23 @@ class OneSendApi
     protected ClientInterface $httpClient;
     protected string $apiKey;
 
-    public function __construct(?ClientInterface $httpClient = null)
+    public readonly ShortMessageEndpoint $shortMessage;
+
+    public function __construct(string $apiKey, ?ClientInterface $httpClient = null)
     {
         $this->httpClient = $httpClient ?? Psr18ClientDiscovery::find();
+        $this->apiKey = $apiKey;
+        $this->initEndpoints();
+    }
+
+    private function initEndpoints(): void
+    {
+        $this->shortMessage = new ShortMessageEndpoint($this);
     }
 
     public function getApiKey(): string
     {
         return $this->apiKey;
-    }
-
-    public function setApiKey(string $apiKey): void
-    {
-        $this->apiKey = $apiKey;
     }
 
     /**
